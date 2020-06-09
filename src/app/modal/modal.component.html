@@ -1,0 +1,32 @@
+<div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add Manager</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input class="form-control" type="text" placeholder="Search" [(ngModel)]="userSearch">
+              <table *ngIf="isUserModal" id="newspaper-b">
+                <!-- <th>Select Manager</th> -->
+                <tbody>
+                <tr *ngFor="let user of userList | listFilter:userSearch" (click)="selectedRow(user)">
+                  <td>{{user.firstName}} {{user.lastName}}</td>
+    
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="setManager()">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>

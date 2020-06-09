@@ -1,0 +1,18 @@
+ul.list-group {
+    width: 70%;
+    float: left;
+}
+
+.list-view-action-btns {
+    width: 25%;
+    float: right;
+}
+.list-view-container {
+    height: 180px;
+    border-bottom: dotted darkgrey;
+    margin-top: 5px;
+}
+.user-add {
+    padding-bottom: 5px;
+    border-bottom: solid #13133c;
+}

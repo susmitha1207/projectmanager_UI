@@ -1,0 +1,210 @@
+<div class="main-container">
+    <div class="add-form">
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+            <input type="number" formControlName="id" hidden />
+            <div class="form-group row">
+                <label class="control-label col-sm-2">Project</label>
+                <div class="col-sm-10">
+                    <div class="search-field">
+                        <input type="text" formControlName="project" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.projectId.errors }" />
+                            <input type="number" formControlName="projectId" hidden/>
+                        <div *ngIf="submitted && f.projectId.errors" class="invalid-feedback">
+                            <div *ngIf="f.projectId.errors.required">Project is required</div>
+                        </div>
+                    </div>
+                    <div class="search-btn">
+                        <input type="button" class="btn btn-secondary" value="Search" data-toggle="modal"
+                            data-target="#projectModal" [disabled]="isParent">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2">Task</label>
+                <div class="col-sm-10">
+                    <input type="text" formControlName="task" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.task.errors }" />
+                    <div *ngIf="submitted && f.task.errors" class="invalid-feedback">
+                        <div *ngIf="f.task.errors.required">Task is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="control-label col-sm-2"></label>
+                <div class="form-group form-check">
+                    <input type="checkbox" formControlName="parent" id="parent" class="form-check-input"
+                        (change)="setParent($event.target.checked)" />
+                    <label for="parent" class="form-check-label">Parent</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2">Parent Task</label>
+                <div class="col-sm-10">
+                    <div class="search-field">
+                        <input type="text" formControlName="parentTask" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.parentTaskId.errors }" />
+                            <input type="number" formControlName="parentTaskId" hidden/>
+                        <div *ngIf="submitted && f.parentTaskId.errors" class="invalid-feedback">
+                            <div *ngIf="f.parentTaskId.errors.required">Parent Task is required</div>
+                        </div>
+                    </div>
+                    <div class="search-btn">
+                        <input type="button" class="btn btn-secondary" value="Search" data-toggle="modal"
+                            data-target="#parentModal"  [disabled]="isParent">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="formControlRange">Priority</label>
+                <div class="col-sm-10">
+                    <input type="range" class="form-control-range slider" [min]="0" max="30" value="0" step="1"
+                        id="formControlRange" formControlName="priority">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4">Start Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" name="startdate" formControlName="startDate" class="form-control"
+                                placeholder="Start Date" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <div class="form-group row">
+                        <label class="control-label col-sm-3">End Date</label>
+                        <div class="col-sm-8">
+                            <input type="date" name="enddate" formControlName="endDate" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2">User</label>
+                <div class="col-sm-10">
+                    <div class="search-field">
+                        <input type="text" formControlName="user" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.userId.errors }" />
+                            <input type="number" formControlName="userId" hidden/>
+                        <div *ngIf="submitted && f.userId.errors" class="invalid-feedback">
+                            <div *ngIf="f.userId.errors.required">User is required</div>
+                        </div>
+                    </div>
+                    <div class="search-btn">
+                        <input type="button" class="btn btn-secondary" value="Search" data-toggle="modal"
+                            data-target="#userModal"  [disabled]="isParent">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-secondary mr-1">{{saveBtnName}}</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Reset</button>
+            </div>
+            <input type="number" formControlName="status" hidden />
+        </form>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="projectModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add Project</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input class="form-control" type="text" placeholder="Search" [(ngModel)]="listSearch">
+              <table id="newspaper-b">
+                <!-- <th>Select Manager</th> -->
+                <tbody>
+                <tr *ngFor="let project of projectList | listFilter:listSearch" (click)="selectedRow(project,'project')">
+                  <td>{{project.project}}</td>
+    
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="setManager()">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
+      <!-- The Modal -->
+<div class="modal" id="parentModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add User</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input class="form-control" type="text" placeholder="Search" [(ngModel)]="listSearch">
+              <table id="newspaper-b">
+                <!-- <th>Select Manager</th> -->
+                <tbody>
+                <tr *ngFor="let parent of parentTaskList | listFilter:listSearch" (click)="selectedRow(parent,'parentTask')">
+                  <td>{{parent.parentTask}}</td>
+    
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="setManager()">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- The Modal -->
+<div class="modal" id="userModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add User</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input class="form-control" type="text" placeholder="Search" [(ngModel)]="listSearch">
+              <table id="newspaper-b">
+                <!-- <th>Select Manager</th> -->
+                <tbody>
+                <tr *ngFor="let user of userList | listFilter:listSearch" (click)="selectedRow(user,'user')">
+                  <td>{{user.firstName}} {{user.lastName}}</td>
+    
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="setManager()">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>

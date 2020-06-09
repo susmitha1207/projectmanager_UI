@@ -1,0 +1,35 @@
+#newspaper-b {
+    border-collapse: collapse;
+    border-color: #B7DDF2;
+    border-style: solid;
+    border-width: 1px;
+    /* font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px; */
+    margin: 0;
+    text-align: left;
+    width: 100%;
+}
+#newspaper-b th {
+    background: none repeat scroll 0 0 #EBF4FB;
+    border-color: lightgray;
+    /* font-size: 11px; */
+    font-weight: bold;
+    padding: 15px 10px 10px;
+}
+#newspaper-b tbody tr td {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+#newspaper-b td {
+    border-top: 1px dashed #FFFFFF;
+    color: #000000;
+    padding: 10px;
+}
+#newspaper-b tbody tr:hover td {
+    cursor: pointer;
+    background: none repeat scroll 0 0 #FFCF8B;
+    color: #000000;
+}
+#newspaper-b tbody tr.selected td {
+    background: none repeat scroll 0 0 #FFCF8B;
+    color: #000000;
+}
