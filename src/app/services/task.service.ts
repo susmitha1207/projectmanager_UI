@@ -9,7 +9,7 @@ import { Task } from '../model/Task';
 })
 export class TaskService {
 
-  private apiUrl='http://localhost:9999/task';
+  private apiUrl='http://localhost:8081/task';
   constructor(private http: HttpClient) { }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -46,7 +46,7 @@ export class TaskService {
     );
   }
   getAllParentTasks(): Observable<any>{
-    const url = `${this.apiUrl}/getAllParentTasks`;
+    const url = `${this.apiUrl}/getParentTask`;
     return this.http.get(url).pipe(
       tap(_ => console.log(`fetched Parent Task list`)),
       catchError(this.handleError<Task>(`getAllParentTasks`))

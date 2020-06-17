@@ -9,7 +9,7 @@ import { User } from '../model/User';
 })
 export class UserService {
   
-  private apiUrl='http://localhost:9999/user';
+  private apiUrl='http://localhost:8081/user';
   constructor(private http: HttpClient) { }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -9,7 +9,7 @@ import { Project } from '../model/Project';
 })
 export class ProjectService {
 
-  private apiUrl='http://localhost:9999/project';
+  private apiUrl='http://localhost:8081/project';
   constructor(private http: HttpClient) { }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -39,7 +39,7 @@ export class ProjectService {
     );
   }
   getAllProjects(): Observable<any>{
-    const url = `${this.apiUrl}/getAllProjects`;
+    const url = `${this.apiUrl}/view`;
     return this.http.get(url).pipe(
       tap(_ => console.log(`fetched project list`)),
       catchError(this.handleError<Project>(`getAllProjects`))
