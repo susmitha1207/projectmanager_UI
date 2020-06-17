@@ -55,7 +55,7 @@ export class TaskComponent implements OnInit {
       }
   }
 );
- this.getAllParentTasks()
+  this.getAllParentTasks()
   this.getAllUsers();
   this.getAllProjects();
   
