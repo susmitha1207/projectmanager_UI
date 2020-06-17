@@ -1,10 +1,10 @@
 pipeline {
-    agent { dockerfile true }
-    stages {
-        stage('build') {
-            steps {
-                sh 'ng build'
-            }
-        }
+   agent any
+   stages {
+  stage('Build') {
+      steps {
+        sh 'npm install'
     }
-}
+  }
+  }
+  }
